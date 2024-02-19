@@ -15,15 +15,15 @@ const Navbar = () => {
       </ul>
     </div>
     <a className="btn btn-ghost text-xl">
-        <Image src={lgo} width={30} height={30} alt='logo'/><span>কোডের কথা</span>
+        <Image src={lgo} width={30} height={30} alt='logo'/><span>Code Talk</span>
     </a>
   </div>
   <div className="navbar-end hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
-      <li><a>হোম</a></li>
+      <li><a>Home</a></li>
     
-      <li><a> ব্লগ </a></li>
-      <li><a> লগআউট </a></li>
+      <li><a> Blog </a></li>
+      <li><a> Logout </a></li>
     </ul>
   </div>
   
