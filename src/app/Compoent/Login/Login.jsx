@@ -4,51 +4,41 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import toast, { Toaster } from 'react-hot-toast';
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 
-const SignupForm = () => {
+const Login = () => {
     const { register, handleSubmit, watch,
         reset,
         formState: { errors }, } = useForm()
     let router = useRouter()
     const [showPassword, setShowPassword] = useState(false);
-    let [loading, setloading] = useState(false)
-    const { createUser, profileUpdate } = UserAuth()
+    const { signIn,googleLogin  } = UserAuth()
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
 
     const onSubmit = async (data) => {
-
+        let { email, password } = data;
         try {
-            await createUser(data.email, data.password)
-            await profileUpdate({
-                displayName: data.name,
-            })
-            toast.success('Registration completed')
-            router.push('/')
+          await signIn(email, password);
+          router.push('/')
+          reset()
         } catch (error) {
-            toast.error(error)
-            console.log(error);
         }
-
     }
+
+    const googleSignin = async () => {
+        try {
+          await googleLogin();
+    
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
     return (
         <div className='text-white'>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
-                    <div className="form-control">
-                        <label className="py-2 text-xs md:text-sm">Name</label>
-                        <input
-                            type="text"
-                            placeholder="Type here"
-                            {...register("name", { required: "name is required" })}
-                            className="input input-bordered w-full max-w-full lg:max-w-xl"
-                        />
-
-                    </div>
-                </div>
                 <div className="form-control">
                     <label className="py-2 text-xs md:text-sm">Email</label>
                     <input
@@ -57,7 +47,9 @@ const SignupForm = () => {
                         {...register("email", { required: " Email is required " })}
                         className="input input-bordered w-full max-w-full lg:max-w-xl "
                     />
-
+                    {errors.email && (
+                        <p className="text-sm pt-1">{errors.email.message}</p>
+                    )}
                 </div>
 
 
@@ -79,7 +71,11 @@ const SignupForm = () => {
                             maxLength={8}
                         />
 
-
+                        {errors.password && (
+                            <p className=" text-sm lg:text-xs xl:text-sm pt-1">
+                                {errors.password.message}
+                            </p>
+                        )}
                     </div>
                     <div className='cursor-pointer items-center pt-8 -ms-7 ' onClick={togglePasswordVisibility}>
                         {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
@@ -92,9 +88,9 @@ const SignupForm = () => {
 
                 <div className="form-control">
                     <label className="py-2 text-xs md:text-base ">
-                        <Link href={"/login"}>
-                            Already have account?
-                            <span className="font-extrabold"> Log In now</span>
+                        <Link href={"/signup"}>
+                            Dont any have account?
+                            <span className="font-extrabold"> Sign up now</span>
                         </Link>
                     </label>
                 </div>
@@ -102,27 +98,26 @@ const SignupForm = () => {
                 <div className="text-center py-2">
                     <button className="btn text-white md:w-full overflow-hidden ">
 
-                        Register
+                        Login
 
                     </button>
                 </div>
-                {errors.name && (
-                    <p className="text-sm pt-1">{errors.name.message}</p>
-                )}
-                {errors.password && (
-                    <p className=" text-sm lg:text-xs xl:text-sm pt-1">
-                        {errors.password.message}
-                    </p>
-                )}
-                {errors.email && (
-                    <p className="text-sm pt-1">{errors.email.message}</p>
-                )}
-
             </form>
-            <Toaster />
+            <div className=" divider  text-sm">OR LogIn with </div>
+        <div className=" flex items-center justify-center py-1 ">
+          <button
+            className="btn btn-circle btn-outline  mx-2"
+            onClick={googleSignin}
+          >
+              G
+           
+          </button>
+         
+        </div>
+      
         </div>
 
     );
 };
 
-export default SignupForm;
+export default Login;

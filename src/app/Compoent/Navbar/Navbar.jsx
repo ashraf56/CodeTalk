@@ -1,8 +1,19 @@
+'use client'
 import React from 'react';
 import lgo from '@/asset/code.png';
 import Image from 'next/image';
 import Link from 'next/link';
+import { UserAuth } from '@/app/context/Authcontext';
+import toast from 'react-hot-toast';
 const Navbar = () => {
+  let {user ,logout}  = UserAuth()
+  const LogOut = async () => {
+    try {
+      await logout()
+      toast.success('success')
+    } catch (error) {
+    }
+  }
     return (
         <div className='bg-base-300 '>
             <div className="navbar container mx-auto">
@@ -24,7 +35,7 @@ const Navbar = () => {
       <li><Link href={'/'}>Home</Link></li>
     
       <li><a> Blog </a></li>
-      <li><a> Logout </a></li>
+      <li>{user? <a  onClick={LogOut}>Logout</a>:<Link href={'/login'}>Log in</Link>}</li>
     </ul>
   </div>
   
