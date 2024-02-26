@@ -9,8 +9,8 @@ const Header = () => {
             <p className='text-xs'>The ultimate resource for learning programming in Bengali. Find incredible training and the latest information on our website. Step-by-step examples and clear explanations provide an unparalleled opportunity to learn programming in a personalized and professional manner</p>
            </div>
            <div className=' w-full lg:w-3/6 mx-auto mt-5 '>
-            <div className='bg-base-100 mx-auto  flex rounded-2xl input items-center max-w-md'>
-            <span className='  text-xl '><IoSearchCircleSharp className='text-4xl' /></span><input type="text" className='bg-base-100  px-3 outline-none ' placeholder='Search Here' /> 
+            <div className='bg-base-100 mx-auto justify-around  flex rounded-full input items-center max-w-md'>
+            <input type="text" className='bg-base-100  px-3 outline-none ' placeholder='Search Here' /> <span className='  text-xl '><IoSearchCircleSharp className='text-4xl' /></span>
             </div>
 
            </div>

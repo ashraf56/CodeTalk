@@ -1,6 +1,7 @@
 import React from 'react';
 import lgo from '@/asset/code.png';
 import Image from 'next/image';
+import Link from 'next/link';
 const Navbar = () => {
     return (
         <div className='bg-base-300 '>
@@ -20,7 +21,7 @@ const Navbar = () => {
   </div>
   <div className="navbar-end hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
-      <li><a>Home</a></li>
+      <li><Link href={'/'}>Home</Link></li>
     
       <li><a> Blog </a></li>
       <li><a> Logout </a></li>
