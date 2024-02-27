@@ -3,9 +3,8 @@ import lgo from '@/asset/code.png';
 import Image from 'next/image';
 import Link from 'next/link';
 import Logoutaction from './Logoutaction';
-import { getUser } from '@/util/getUser';
 const Navbar = async() => {
-let user= await getUser()
+
 
  
   return (

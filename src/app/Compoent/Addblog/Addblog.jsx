@@ -53,44 +53,44 @@ const Addblog = () => {
         
 
 
-        try {
+        // try {
 
-            const selectedOptions = selcetOption.map((option) => option.value);
-            data.select = selectedOptions
-            const result = await fetch('/api/blog',
-                {
-                    method: "POST",
-                    headers: {
-                        "content-type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        status: 'pending',
-                        date: data.date,
-                        title: data.title,
-                        author: data.author,
-                        content: editorContent,
-                        email: data.email,
-                        tag: data.select
+        //     const selectedOptions = selcetOption.map((option) => option.value);
+        //     data.select = selectedOptions
+        //     const result = await fetch('/api/blog',
+        //         {
+        //             method: "POST",
+        //             headers: {
+        //                 "content-type": "application/json",
+        //             },
+        //             body: JSON.stringify({
+        //                 status: 'pending',
+        //                 date: data.date,
+        //                 title: data.title,
+        //                 author: data.author,
+        //                 content: editorContent,
+        //                 email: data.email,
+        //                 tag: data.select
 
-                    })
-                }
-            )
+        //             })
+        //         }
+        //     )
 
-            const allBlogData = await result.json();
+        //     const allBlogData = await result.json();
 
-            if (allBlogData) {
-                toast.success('success')
-                router.refresh()
+        //     if (allBlogData) {
+        //         toast.success('success')
+        //         router.refresh()
 
-                reset()
+        //         reset()
                 
-            }
-            else {
-                throw new Error("Failed to add");
-            }
-        } catch (error) {
-            console.log(error);
-        }
+        //     }
+        //     else {
+        //         throw new Error("Failed to add");
+        //     }
+        // } catch (error) {
+        //     console.log(error);
+        // }
 
     }
     return (

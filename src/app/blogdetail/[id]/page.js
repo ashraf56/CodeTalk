@@ -1,9 +1,12 @@
 import React from 'react';
 
-const page = ({params}) => {
+const page = async({params}) => {
+    let {id}=params
+  
+
     return (
         <div>
-            
+dsdsdf
         </div>
     );
 };
