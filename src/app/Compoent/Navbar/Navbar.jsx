@@ -28,7 +28,7 @@ const Navbar = async() => {
             <li><Link href={'/'}>Home</Link></li>
 
             <li><a> Blog </a></li>
-           {  <li><Link href={'/addblog'}>Create blog</Link></li>}
+           {  <li><Link href={'/createblog'}>Create blog</Link></li>}
            <Logoutaction></Logoutaction>
           </ul>
         </div>

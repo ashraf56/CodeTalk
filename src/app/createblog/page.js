@@ -1,7 +1,7 @@
 import React from 'react';
 import Addblog from '../Compoent/Addblog/Addblog';
 
-const addBlog = () => {
+const createblog = () => {
     return (
         <div>
            <Addblog></Addblog> 
@@ -9,4 +9,4 @@ const addBlog = () => {
     );
 };
 
-export default addBlog;
+export default createblog;
