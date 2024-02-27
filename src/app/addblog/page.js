@@ -1,8 +1,8 @@
-'use client'
+
 import React from 'react';
 import Addblog from '../Compoent/Addblog/Addblog';
 
-const createblog = () => {
+const addblog = () => {
     return (
         <div>
            <Addblog></Addblog> 
@@ -10,4 +10,4 @@ const createblog = () => {
     );
 };
 
-export default createblog;
+export default addblog;
