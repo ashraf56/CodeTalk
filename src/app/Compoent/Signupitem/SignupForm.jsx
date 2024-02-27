@@ -14,26 +14,91 @@ const SignupForm = () => {
     let router = useRouter()
     const [showPassword, setShowPassword] = useState(false);
     let [loading, setloading] = useState(false)
-    const { createUser, profileUpdate } = UserAuth()
+    const { createUser, profileUpdate ,googleLogin} = UserAuth()
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
 
     const onSubmit = async (data) => {
 
+
         try {
+
             await createUser(data.email, data.password)
             await profileUpdate({
                 displayName: data.name,
             })
-            toast.success('Registration completed')
-            router.push('/')
+            const res = await fetch("/api/user",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/json",
+                    },
+                    body: JSON.stringify({ name: data.name, email: data.email, role: 'user' }),
+                });
+            if (res.ok) {
+                const data = await res.json();
+                if (data.message && data.message === "User already exists") {
+                    // Handle case where user already exists
+                    toast.error('User already exists', {
+                        duration: 4000,
+                        position: "top-center"
+                    });
+                } else {
+                    // Handle successful creation
+                    toast.success('Successfully created!', {
+                        duration: 4000,
+                        position: "top-center"
+                    });
+                    router.push('/');
+                }
+            } else {
+                throw new Error(data.message);
+            }
+
         } catch (error) {
-            toast.error(error)
+            toast.error(error.message)
             console.log(error);
         }
 
     }
+    const googleSignin = async () => {
+        try {
+            let { user } = await googleLogin();
+            const res = await fetch("/api/user",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/json",
+                    },
+                    body: JSON.stringify({ name: user.displayName, email: user.email, role: 'user' }),
+                });
+            if (res.ok) {
+                const data = await res.json();
+
+                if (data.message && data.message === "User already exists") {
+                    // Handle case where user already exists
+                    toast.error('User already exists', {
+                        duration: 4000,
+                        position: "top-center"
+                    });
+                } else {
+                    // Handle successful creation
+                    toast.success('Successfully created!', {
+                        duration: 4000,
+                        position: "top-center"
+                    });
+                    router.push('/');
+                }
+            } else {
+                throw new Error('registration failed');
+            }
+        } catch (error) {
+            toast.error(error.message)
+            console.log(error);
+        }
+    }
+
     return (
         <div className='text-white'>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -119,6 +184,17 @@ const SignupForm = () => {
                 )}
 
             </form>
+            <div className=" divider  text-sm">OR LogIn with </div>
+            <div className=" flex items-center justify-center py-1 ">
+                <button
+                    className="btn btn-circle btn-outline  mx-2"
+                    onClick={googleSignin}
+                >
+                    G
+
+                </button>
+
+            </div>
             <Toaster />
         </div>
 

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 
 const Login = () => {
@@ -12,7 +13,7 @@ const Login = () => {
         formState: { errors }, } = useForm()
     let router = useRouter()
     const [showPassword, setShowPassword] = useState(false);
-    const { signIn,googleLogin  } = UserAuth()
+    const { signIn, googleLogin } = UserAuth()
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
@@ -20,21 +21,23 @@ const Login = () => {
     const onSubmit = async (data) => {
         let { email, password } = data;
         try {
-          await signIn(email, password);
-          router.push('/')
-          reset()
+            await signIn(email, password);
+            router.push('/')
+            reset()
         } catch (error) {
         }
     }
 
     const googleSignin = async () => {
         try {
-          await googleLogin();
-    
+            await googleLogin();
+
+            router.push('/');
+
         } catch (error) {
-          console.log(error);
+            console.log(error);
         }
-      }
+    }
 
     return (
         <div className='text-white'>
@@ -104,17 +107,17 @@ const Login = () => {
                 </div>
             </form>
             <div className=" divider  text-sm">OR LogIn with </div>
-        <div className=" flex items-center justify-center py-1 ">
-          <button
-            className="btn btn-circle btn-outline  mx-2"
-            onClick={googleSignin}
-          >
-              G
-           
-          </button>
-         
-        </div>
-      
+            <div className=" flex items-center justify-center py-1 ">
+                <button
+                    className="btn btn-circle btn-outline  mx-2"
+                    onClick={googleSignin}
+                >
+                    G
+
+                </button>
+
+            </div>
+
         </div>
 
     );
