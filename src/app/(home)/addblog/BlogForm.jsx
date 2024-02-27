@@ -9,6 +9,8 @@ import 'react-quill/dist/quill.snow.css';
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated';
 const animatedComponents = makeAnimated()
+
+
 const options = [
     { value: 'react', label: 'React' },
     { value: 'vue', label: 'Vue.js' },
@@ -32,6 +34,7 @@ const options = [
     { value: 'kotlin', label: 'Kotlin' }
 ]
 const BlogForm = () => {
+    const ReactQuill = typeof window === 'object' ? require('react-quill') : () => false;
     let { user } = UserAuth()
     let [selcetOption, setSelectOption] = useState([])
 
@@ -143,14 +146,14 @@ const BlogForm = () => {
                     <label className="label">
                         <span className="label-text">description</span>
                     </label>
-                    <ReactQuill
+                  { ReactQuill && <ReactQuill
                         value={editorContent}
                         onChange={setEditorContent}
                         theme="snow"
                         className="h-96 textarea-secondary"
                         modules={{ toolbar: true }}
                         placeholder="Description"
-                    />
+                    />}
                 </div>
 
 
