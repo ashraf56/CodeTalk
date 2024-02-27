@@ -1,9 +1,8 @@
-import getBlogs from '@/util/getBlogs';
 import Link from 'next/link';
 import React from 'react';
 
 const Allblogs = async () => {
-     let data = await getBlogs() 
+    //  let data = await getBlogs() 
 
     return (
         <div className='container mx-auto' >
