@@ -1,4 +1,5 @@
 
+import Allblogs from "./Compoent/AllBlogs/Allblogs";
 import Header from "./Compoent/Header/Header";
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <main >
       
       <Header></Header>
+      <Allblogs></Allblogs>
     </main>
   );
 }
