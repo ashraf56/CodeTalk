@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Toaster } from 'react-hot-toast';
-// import ReactQuill from 'react-quill';
+import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated';
@@ -139,7 +139,7 @@ const BlogForm = () => {
 
                     />
                 </div>
-                {/* <div className="form-control">
+                <div className="form-control">
                     <label className="label">
                         <span className="label-text">description</span>
                     </label>
@@ -151,7 +151,7 @@ const BlogForm = () => {
                         modules={{ toolbar: true }}
                         placeholder="Description"
                     />
-                </div> */}
+                </div>
 
 
                 <div className="form-control mt-10">
