@@ -148,7 +148,7 @@ const Addblog = () => {
 
                                 />
                             </div>
-                            <div className="form-control">
+                            {/* <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">description</span>
                                 </label>
@@ -160,7 +160,7 @@ const Addblog = () => {
                                     modules={{ toolbar: true }}
                                     placeholder="Description"
                                 />
-                            </div>
+                            </div> */}
                             
 
                             <div className="form-control mt-10">
