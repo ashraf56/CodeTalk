@@ -1,6 +1,9 @@
 'use client'
+import dynamic from 'next/dynamic';
 import React from 'react';
-import BlogForm from './BlogForm';
+const BlogForm = dynamic(() => import("./BlogForm"), {
+    ssr: false,
+  });
 
 const addblog = () => {
     return (
