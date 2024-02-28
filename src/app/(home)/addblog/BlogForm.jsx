@@ -1,11 +1,10 @@
 'use client'
 import { UserAuth } from '@/app/context/Authcontext';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Toaster } from 'react-hot-toast';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import JoditEditor from 'jodit-react';
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated';
 const animatedComponents = makeAnimated()
@@ -33,12 +32,13 @@ const options = [
     { value: 'swift', label: 'Swift' },
     { value: 'kotlin', label: 'Kotlin' }
 ]
+
 const BlogForm = () => {
-    const ReactQuill = typeof window === 'object' ? require('react-quill') : () => false;
     let { user } = UserAuth()
     let [selcetOption, setSelectOption] = useState([])
 
     const [editorContent, setEditorContent] = useState('');
+    const editor = useRef(null);
     const router = useRouter();
     const { register, handleSubmit, control, formState: { errors }, reset } = useForm()
     const today = new Date();
@@ -50,9 +50,14 @@ const BlogForm = () => {
 
     }
     const onSubmit = async (data) => {
+let info ={ status: 'pending',               date: data.date,
+                title: data.title,
+                author: data.author,
+               content: editorContent,
+               email: data.email,
+                tag: data.select}
 
-
-
+console.log(info);
         // try {
 
         //     const selectedOptions = selcetOption.map((option) => option.value);
@@ -146,14 +151,15 @@ const BlogForm = () => {
                     <label className="label">
                         <span className="label-text">description</span>
                     </label>
-                  { ReactQuill && <ReactQuill
-                        value={editorContent}
-                        onChange={setEditorContent}
-                        theme="snow"
-                        className="h-96 textarea-secondary"
-                        modules={{ toolbar: true }}
-                        placeholder="Description"
-                    />}
+                    <JoditEditor
+			ref={editor}
+			value={editorContent}
+		
+			tabIndex={1} // tabIndex of textarea
+			
+			onChange={newContent => setEditorContent(newContent)}
+            className='text-black bg-base-100'
+		/>
                 </div>
 
 
