@@ -1,10 +1,11 @@
-'use client'
+
 import { UserAuth } from '@/app/context/Authcontext';
 import { useRouter } from 'next/navigation';
 import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Toaster } from 'react-hot-toast';
-import JoditEditor from 'jodit-react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated';
 const animatedComponents = makeAnimated()
@@ -151,15 +152,14 @@ console.log(info);
                     <label className="label">
                         <span className="label-text">description</span>
                     </label>
-                    <JoditEditor
-			ref={editor}
-			value={editorContent}
-		
-			tabIndex={1} // tabIndex of textarea
-			
-			onChange={newContent => setEditorContent(newContent)}
-            className='text-black bg-base-100'
-		/>
+                    <ReactQuill
+                        value={editorContent}
+                        onChange={setEditorContent}
+                        theme="snow"
+                        className="h-96 textarea-secondary"
+                        modules={{ toolbar: true }}
+                        placeholder="Description"
+                    />
                 </div>
 
 
