@@ -5,12 +5,11 @@ const Allblogs = async () => {
     //  let data = await getBlogs() 
 
     return (
-        <div className='container mx-auto' >
-            <h1 className='text-white py-10 font-bold'>Read letest Blogs</h1>
+        <div className='container mx-auto ' >
             <div className='grid grid-cols-3  gap-3 mx-auto  p-10'>
 
 
-            <div className='card w-96 shadow-2xl p-2 bg-black'  >
+            <div className='card w-96 shadow-2xl p-2 bg-[#000022] hover:bg-gradient-to-tl hover:transition-all'  >
                     <div className="card-body">
                         <div >
                             <span className='pe-3'>Mar 1, 24</span>

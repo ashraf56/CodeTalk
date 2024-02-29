@@ -39,7 +39,6 @@ const BlogForm = () => {
     let [selcetOption, setSelectOption] = useState([])
 
     const [editorContent, setEditorContent] = useState('');
-    const editor = useRef(null);
     const router = useRouter();
     const { register, handleSubmit, control, formState: { errors }, reset } = useForm()
     const today = new Date();
@@ -163,7 +162,7 @@ console.log(info);
                 </div>
 
 
-                <div className="form-control mt-10">
+                <div className="form-control mt-20">
                     <button className="bg-[#0072BB] text-base text-white  py-3 px-4 rounded-md w-52 uppercase  flex justify-center items-center">
                         add
                     </button>

@@ -3,7 +3,7 @@ import React from 'react';
 
 const layout = ({children}) => {
     return (
-        <div>
+        <div className='bg-black'>
             {children}
         </div>
     );

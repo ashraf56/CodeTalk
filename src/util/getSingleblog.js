@@ -1,19 +1,19 @@
 
-// const getSingleblog = async(id) => {
-//     let base_url = process.env.BaseUrl;
+const getSingleblog = async(id) => {
+    let base_url = process.env.BaseUrl;
 
-//     try {
+    try {
         
-// let res = await fetch(`${base_url}/api/blog/${id}`, {cache:'no-cache'})
-// if (!res.ok) {
-//     throw new Error("error") 
-// }
-// let data = res.json()
-// return data;
-//     } catch (error) {
-//         console.log(error);
-//     }
+let res = await fetch(`${base_url}/api/blog/${id}`, {cache:'no-cache'})
+if (!res.ok) {
+    throw new Error("error") 
+}
+let data = res.json()
+return data;
+    } catch (error) {
+        console.log(error);
+    }
   
-// };
+};
 
-// export default getSingleblog;
+export default getSingleblog;

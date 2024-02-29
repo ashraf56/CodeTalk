@@ -1,7 +1,7 @@
 'use client'
 import dynamic from 'next/dynamic';
 import React from 'react';
-const BlogForm = dynamic(() => import("./BlogForm"), {
+const BlogForm = dynamic(() => import("./BlogForm.jsx"), {
     ssr: false,
   });
 

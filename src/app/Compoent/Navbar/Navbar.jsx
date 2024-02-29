@@ -8,7 +8,7 @@ const Navbar = async() => {
 
  
   return (
-    <div className='bg-base-300 '>
+    <div className=' bg-black '>
       <div className="navbar container mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
