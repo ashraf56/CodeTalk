@@ -1,9 +1,9 @@
-
+'use client'
 import { UserAuth } from '@/app/context/Authcontext';
 import { useRouter } from 'next/navigation';
 import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import Select from 'react-select'
@@ -31,7 +31,8 @@ const options = [
     { value: 'go', label: 'Golang' },
     { value: 'rust', label: 'Rust' },
     { value: 'swift', label: 'Swift' },
-    { value: 'kotlin', label: 'Kotlin' }
+    { value: 'kotlin', label: 'Kotlin' },
+    { value: 'Javascript', label: 'Javascript' }
 ]
 
 const BlogForm = () => {
@@ -50,52 +51,45 @@ const BlogForm = () => {
 
     }
     const onSubmit = async (data) => {
-let info ={ status: 'pending',               date: data.date,
-                title: data.title,
-                author: data.author,
-               content: editorContent,
-               email: data.email,
-                tag: data.select}
 
-console.log(info);
-        // try {
+        try {
 
-        //     const selectedOptions = selcetOption.map((option) => option.value);
-        //     data.select = selectedOptions
-        //     const result = await fetch('/api/blog',
-        //         {
-        //             method: "POST",
-        //             headers: {
-        //                 "content-type": "application/json",
-        //             },
-        //             body: JSON.stringify({
-        //                 status: 'pending',
-        //                 date: data.date,
-        //                 title: data.title,
-        //                 author: data.author,
-        //                 content: editorContent,
-        //                 email: data.email,
-        //                 tag: data.select
+            const selectedOptions = selcetOption.map((option) => option.value);
+            data.select = selectedOptions
+            const result = await fetch('/api/blog',
+                {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        status: 'pending',
+                        date: data.date,
+                        title: data.title,
+                        author: data.author,
+                        content: editorContent,
+                        email: data.email,
+                        tag: data.select
 
-        //             })
-        //         }
-        //     )
+                    })
+                }
+            )
 
-        //     const allBlogData = await result.json();
+            const allBlogData = await result.json();
 
-        //     if (allBlogData) {
-        //         toast.success('success')
-        //         router.refresh()
+            if (allBlogData) {
+                toast.success('success')
+                router.refresh()
 
-        //         reset()
+                reset()
 
-        //     }
-        //     else {
-        //         throw new Error("Failed to add");
-        //     }
-        // } catch (error) {
-        //     console.log(error);
-        // }
+            }
+            else {
+                throw new Error("Failed to add");
+            }
+        } catch (error) {
+            console.log(error);
+        }
 
     }
     return (
