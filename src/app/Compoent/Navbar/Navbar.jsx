@@ -1,12 +1,14 @@
+'use client'
 import React from 'react';
 import lgo from '@/asset/code.png';
 import Image from 'next/image';
 import Link from 'next/link';
 import Logoutaction from './Logoutaction';
-const Navbar = async() => {
+import { UserAuth } from '@/app/context/Authcontext';
+const Navbar = () => {
 
+let {user} = UserAuth()
 
- 
   return (
     <div className=' bg-black  '>
       <div className="navbar container mx-auto">
@@ -28,7 +30,8 @@ const Navbar = async() => {
             <li><Link href={'/'}>Home</Link></li>
 
             <li><a> Blog </a></li>
-           {  <li><Link href={'/addblog'}>Create blog</Link></li>}
+            { user?.email === 'ashrafulfahim07@gmail.com'  && <li ><Link href={'/addblog'}>Create blog</Link></li>
+           }
            <Logoutaction></Logoutaction>
           </ul>
         </div>
