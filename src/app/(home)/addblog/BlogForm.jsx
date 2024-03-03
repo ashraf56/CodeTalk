@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
+import { InfinitySpin } from 'react-loader-spinner';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import Select from 'react-select'
@@ -16,6 +17,7 @@ const options = [
     { value: 'vue', label: 'Vue.js' },
     { value: 'angular', label: 'Angular' },
     { value: 'svelte', label: 'Svelte' },
+    { value: 'next', label: 'Next.js' },
     { value: 'node', label: 'Node.js' },
     { value: 'deno', label: 'Deno' },
     { value: 'python', label: 'Python' },
@@ -32,12 +34,15 @@ const options = [
     { value: 'rust', label: 'Rust' },
     { value: 'swift', label: 'Swift' },
     { value: 'kotlin', label: 'Kotlin' },
-    { value: 'Javascript', label: 'Javascript' }
-]
+    { value: 'javascript', label: 'JavaScript' },
+    { value: 'redux', label: 'redux' }
+];
+
 
 const BlogForm = () => {
     let { user } = UserAuth()
     let [selcetOption, setSelectOption] = useState([])
+    let [issubmit, setIssubmit] = useState(false)
 
     const [editorContent, setEditorContent] = useState('');
     const router = useRouter();
@@ -51,7 +56,7 @@ const BlogForm = () => {
 
     }
     const onSubmit = async (data) => {
-
+        setIssubmit(true)
         try {
 
             const selectedOptions = selcetOption.map((option) => option.value);
@@ -87,6 +92,7 @@ const BlogForm = () => {
             else {
                 throw new Error("Failed to add");
             }
+            setIssubmit(false)
         } catch (error) {
             console.log(error);
         }
@@ -157,9 +163,20 @@ const BlogForm = () => {
 
 
                 <div className="form-control mt-20">
-                    <button className="bg-[#0072BB] text-base text-white  py-3 px-4 rounded-md w-52 uppercase  flex justify-center items-center">
-                        add
-                    </button>
+                    {
+                        issubmit ? <div className='flex  items-center' >
+                            <InfinitySpin
+                                visible={true}
+                                width="150"
+
+                                color="#ffffff"
+                                ariaLabel="infinity-spin-loading"
+                            />
+                        </div> :
+                            <button className="bg-[#0072BB] text-base text-white  py-3 px-4 rounded-md w-52 uppercase  flex justify-center items-center">
+                                add
+
+                            </button>}
                 </div>
             </form>
             <Toaster></Toaster>
