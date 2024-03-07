@@ -6,6 +6,7 @@ import { auth } from '../firebase/firebase.config';
 const AuthContext = createContext()
 export const AuthcontextProvider = ({ children }) => {
     let [user, setUser] = useState(null)
+    let [search, Setsearch] = useState('')
     const [loading, setLoading] = useState(true);
     const createUser = (email, password) => {
         setLoading(true);
@@ -29,6 +30,16 @@ export const AuthcontextProvider = ({ children }) => {
         setLoading(true);
         return signOut(auth);
     };
+
+    let flterBLogs = ((m) => {
+        const lowerCaseSearch = search.toLowerCase();
+        return (
+            (!search ||
+                m.title.toLowerCase().includes(lowerCaseSearch))
+                || (m.tag && m.tag.some(tag => tag.toLowerCase().includes(lowerCaseSearch)))
+        );
+    })
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             setUser(user);
@@ -39,7 +50,7 @@ export const AuthcontextProvider = ({ children }) => {
         };
     }, []);
     let value = {
-        user, loading, createUser, profileUpdate, googleLogin, logout, signIn
+        user, loading, createUser, profileUpdate, googleLogin, logout, signIn, search, Setsearch, flterBLogs
     }
     return <AuthContext.Provider value={value} >{children}</AuthContext.Provider>
 };

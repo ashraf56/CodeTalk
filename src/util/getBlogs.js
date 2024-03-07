@@ -4,7 +4,7 @@ const getBlogs = async() => {
     let base_url = process.env.BaseUrl;
 
     try {
-        let res = await fetch(`${base_url}/api/blog`, { cache: "no-store" });
+        let res = await fetch(`/api/blog`, { cache: "no-store" });
       
       if (!res.ok) {
         throw new Error("data load failed");
